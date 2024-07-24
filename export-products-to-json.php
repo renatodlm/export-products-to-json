@@ -16,16 +16,6 @@ if (!defined('EXPORT_PRODUCT_SELECT_DIR_PATH'))
    define('EXPORT_PRODUCT_SELECT_DIR_PATH', plugin_dir_path(__FILE__));
 }
 
-if (!defined('HOUR_IN_SECONDS'))
-{
-   define('HOUR_IN_SECONDS', 60 * 60);
-}
-
-if (!defined('DAY_IN_SECONDS'))
-{
-   define('DAY_IN_SECONDS', 24 * HOUR_IN_SECONDS);
-}
-
 class Export_Products_To_JSON
 {
    public function __construct()
@@ -106,7 +96,7 @@ class Export_Products_To_JSON
       foreach ($products as $product)
       {
          $variations           = $this->get_variation_data($product->ID);
-         $organized_variations = $this->organize_variations($variations, array());
+         $organized_variations = $this->organize_variations($variations, $product->ID);
 
          $json_output[$product->ID] = $organized_variations;
       }
@@ -194,60 +184,61 @@ class Export_Products_To_JSON
       return $variations;
    }
 
-   public function organize_variations($variations, $labels)
+   public function organize_variations($variations, $product_id)
    {
-      $organized = array();
+      $organized = [];
+      $labels    = $this->get_labels($product_id);
 
       foreach ($variations as $variation)
       {
-         $marca      = $variation['attribute_pa_marca'];
-         $modelo     = $variation['attribute_pa_modelo'];
-         $ano        = $variation['attribute_pa_ano'];
-         $cor        = $variation['attribute_pa_cor'];
-         $product_id = $variation['product_id'];
+         $current_level = &$organized;
+         $attributes = array_keys($variation);
+         $last_attribute = array_pop($attributes);
 
-         if (!isset($organized[$marca]))
+         foreach ($variation as $attribute => $value)
          {
-            $organized[$marca] = array(
-               'name'               => $labels[$marca] ?? '',
-               'attribute_pa_marca' => $marca,
-               'data'               => array()
-            );
+            if ($attribute == 'product_id')
+            {
+               continue;
+            }
+
+            if (!isset($current_level[$attribute][$value]))
+            {
+               $current_level[$attribute][$value] = array(
+                  'name'  => $labels[$value] ?? $attribute,
+                  'value' => $value,
+                  'data'  => array()
+               );
+            }
+
+            $current_level = &$current_level[$attribute][$value]['data'];
          }
 
-         $marca_data = &$organized[$marca]['data'];
-
-         if (!isset($marca_data[$modelo]))
-         {
-            $marca_data[$modelo] = array(
-               'name'                => $labels[$modelo] ?? '',
-               'attribute_pa_modelo' => $modelo,
-               'data'                => array()
-            );
-         }
-
-         $modelo_data = &$marca_data[$modelo]['data'];
-
-         if (!isset($modelo_data[$ano]))
-         {
-            $modelo_data[$ano] = array(
-               'name'             => $labels[$ano] ?? '',
-               'attribute_pa_ano' => $ano,
-               'data'             => array()
-            );
-         }
-
-         $ano_data = &$modelo_data[$ano]['data'];
-
-         $ano_data[] = array(
-            'attribute_pa_cor' => $cor,
-            'product_id'       => $product_id
+         $current_level[] = array(
+            'product_id' => $variation['product_id']
          );
       }
 
       return $organized;
    }
+
+   public function get_labels($product_id)
+   {
+      $labels = array();
+      $product = \wc_get_product($product_id);
+      $attributes = $product->get_attributes();
+
+      foreach ($attributes as $attribute)
+      {
+         $terms = \wc_get_product_terms($product_id, $attribute->get_name(), array('fields' => 'all'));
+         foreach ($terms as $term)
+         {
+            $labels[$term->slug] = $term->name;
+         }
+      }
+
+      return $labels;
+   }
 }
 
 new Export_Products_To_JSON();
-?>
