@@ -1,0 +1,490 @@
+.variant-component-2 input[type='checkbox'].toggle {
+   display: inline-block;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   width: 3.4375rem;
+   height: 1.625rem;
+   background-color: #EDF0F6;
+   position: relative;
+   -moz-border-radius: 1.875rem;
+   -webkit-border-radius: 1.875rem;
+   border-radius: 1.875rem;
+   @inlcude box-shadow(none);
+   -moz-transition: all 0.2s ease-in-out;
+   -o-transition: all 0.2s ease-in-out;
+   -webkit-transition: all 0.2s ease-in-out;
+   transition: all 0.2s ease-in-out;
+   border: 1px solid #DFDFDF;
+}
+
+.variant-component-2 input[type='checkbox'].toggle:hover:after {
+   background-color: #AAAAAA;
+}
+
+.variant-component-2 input[type='checkbox'].toggle:after {
+   content: '';
+   display: inline-block;
+   position: absolute;
+   width: 1.5rem;
+   height: 1.5rem;
+   background-color: #AAAAAA;
+   top: 0;
+   left: 0;
+   -moz-border-radius: 50%;
+   -webkit-border-radius: 50%;
+   border-radius: 50%;
+   -moz-transition: all 0.2s ease-in-out;
+   -o-transition: all 0.2s ease-in-out;
+   -webkit-transition: all 0.2s ease-in-out;
+   transition: all 0.2s ease-in-out;
+}
+
+.variant-component-2 input[type='checkbox']:checked.toggle:after {
+   left: 1.8125rem;
+   background-color: #0071E3;
+}
+
+.variant-component-2 .select2-container {
+   width: 100% !important;
+}
+
+.variant-component-2 .select2-choice {
+   padding-top: 0.4375rem !important;
+   padding-bottom: 0.4375rem !important;
+   padding-left: 0.5 !important;
+   padding-right: 1.625rem !important;
+   background: #EDF0F6 !important;
+   border-radius: 8px !important;
+   border: 1px solid #E5E5E8 !important;
+   height: 2.625rem !important;
+}
+
+.variant-component-2 .select2-choice:hover,
+.variant-component-2 .select2-choice:focus {
+   background: #EDF0F6 !important;
+   border: 1px solid #E5E5E8 !important;
+}
+
+.variant-component-2 .select2-container {}
+
+.variant-component-2 .select2-container.select2-dropdown-open .select2-choice {
+   border-bottom-left-radius: 0 !important;
+   border-bottom-right-radius: 0 !important;
+   border: 1px solid #0071E3 !important;
+}
+
+.variant-component-2 .select2-container .select2-container-active {}
+
+.variant-component-2 .select2-chosen {
+   display: flex !important;
+   justify-content: start;
+   align-items: center;
+   gap: 0.3125rem;
+   width: 100%;
+   text-overflow: ellipsis;
+   overflow: hidden;
+}
+
+.variant-component-2 .elect2-search-choice-close {}
+
+.variant-component-2 .select2-container .select2-choice .select2-arrow {
+   background: none !important;
+   border: none !important;
+   padding-right: 0.625rem;
+   padding-left: 0.625rem;
+}
+
+.variant-component-2 .select2-container .select2-choice .select2-arrow b {
+   background-image: url(../imgs/arrow.svg) !important;
+   background-position: center !important;
+   background-repeat: no-repeat !important;
+   background-size: 1rem !important;
+   position: absolute;
+   right: 0;
+   width: 1.25rem;
+   margin-right: 0.5rem;
+}
+
+.select2-search {
+   padding: 0.5rem !important;
+}
+
+.select2-search .select2-input {
+   padding: 0.625rem 0.5rem;
+   background: transparent !important;
+   border-radius: 4px;
+   border: 1px solid #E5E5E8 !important;
+   font-size: 0.875rem;
+   line-height: 1;
+}
+
+.select2-search .select2-input:placeholder {
+   color: #6B6B6B;
+   font-size: 0.875rem;
+   line-height: 1;
+}
+
+.select2-drop {
+   border-radius: 0 0 8px 8px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.select2-drop-active {
+   border: 1px solid #0071e3 !important;
+   border-top: none !important;
+}
+
+.select2-drop .select2-results {
+   position: relative;
+}
+
+.select2-drop .select2-results::-webkit-scrollbar {
+   width: 0.25rem;
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+}
+
+.select2-drop .select2-results::-webkit-scrollbar-thumb {
+   background-color: #69B4FF;
+   border-radius: 6.25rem;
+}
+
+.select2-drop .select2-result+.select2-result {
+   border-top: 0.5px solid #DDDDE0;
+}
+
+.select2-drop .select2-result {
+   padding: 8px 16px 8px 8px;
+}
+
+.variant-component-2 .select2-search-choice-close {
+   display: none !important;
+}
+
+@media(max-width:1024px) {
+   .variant-component-icon-search {
+      display: none;
+   }
+}
+
+.variant-component-2 {
+   max-width: 41.3125rem;
+   width: 100%;
+   background-color: #ffffff;
+   padding: 1rem;
+   border-radius: 16px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.variant-component-2 p {
+   margin: 0 !important;
+   padding: 0 !important;
+   color: black !important;
+   text-align: left;
+}
+
+@media(min-width:1024px) {
+   .variant-component-2 p br {
+      display: none;
+   }
+}
+
+
+@media(max-width:1024px) {
+   .variant-component-2 p {
+      font-size: 0.875rem;
+   }
+}
+
+.variant-component-2 * {
+   outline: none !important;
+   box-shadow: none !important;
+}
+
+.variant-component-2 .font-medium {
+   font-weight: 500;
+}
+
+.variant-component-2 .font-semibold {
+   font-weight: 600;
+}
+
+.variant-component-2 .font-bold {
+   font-weight: 500;
+}
+
+.variant-component-2 .variant-component-form {}
+
+.variant-component-2 .variant-component-container {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.variant-component-2 .variant-component-container {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+
+.variant-component-2 .variant-component-header {
+   display: flex;
+   justify-content: space-between;
+   gap: 1rem;
+}
+
+@media(max-width:1024px) {
+   .variant-component-2 .variant-component-header {
+      flex-direction: column;
+   }
+}
+
+.variant-component-2 .variant-component-search {
+   width: fit-content;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+.variant-component-2 .variant-component-plate {
+   width: fit-content;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+@media(min-width:1024px) {
+   .variant-component-2 .variant-component-body {
+      column-gap: 0.75rem;
+   }
+}
+
+.variant-component-2 .variant-component-body {
+   display: grid;
+   align-items: center;
+   row-gap: 0.75rem;
+   flex-wrap: wrap;
+   grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+@media(max-width:1024px) {
+   .variant-component-2 .variant-component-body {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+   }
+}
+
+/*
+.variant-component-2 .variant-component-option {
+   width: calc(25% - 0.5rem);
+} */
+
+/* @media(max-width:1024px) { */
+.variant-component-2 .variant-component-option {
+   grid-column: span 2/span 2;
+}
+
+/* } */
+
+.variant-component-2 .variant-component-option .variant-marca span.select2-chosen {
+   position: relative;
+   display: block;
+}
+
+.variant-component-2 .select2-container .select2-choice>.select2-chosen {
+   margin-right: 0.5rem !important;
+}
+
+.variant-component-2 .variant-component-option.variant-marca span.select2-chosen::before {
+   content: ' ';
+   display: inline-block;
+   width: 1.25rem;
+   height: 1.25rem;
+   background-image: url(../imgs/brand-green.svg);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   min-width: 1.25rem;
+}
+
+.variant-component-2 .variant-component-option.variant-model span.select2-chosen::before {
+   content: ' ';
+   display: inline-block;
+   width: 1.25rem;
+   height: 1.25rem;
+   background-image: url(../imgs/model-green.svg);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   min-width: 1.25rem;
+}
+
+.variant-component-2 .variant-component-option.variant-ano span.select2-chosen::before {
+   content: ' ';
+   display: inline-block;
+   width: 1.25rem;
+   height: 1.25rem;
+   background-image: url(../imgs/calendar-green.svg);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   min-width: 1.25rem;
+}
+
+.variant-component-2 .variant-component-option select {
+   padding-top: 0.4375rem !important;
+   padding-bottom: 0.4375rem !important;
+   text-indent: 1.3rem !important;
+   padding-right: 1.625rem !important;
+   background: #EDF0F6 !important;
+   border-radius: 8px !important;
+   border: 1px solid #E5E5E8 !important;
+   height: 2.625rem !important;
+}
+
+.variant-component-2 .variant-component-option select::placeholder {
+   color: black !important;
+}
+
+.variant-component-2 .variant-component-option.variant-marca .select2-choice.select2-default span.select2-chosen::before {
+   background-image: url(../imgs/brand.svg) !important;
+}
+
+.variant-component-2 .variant-component-option.variant-model .select2-choice.select2-default span.select2-chosen::before {
+   background-image: url(../imgs/model.svg) !important;
+}
+
+.variant-component-2 .variant-component-option.variant-ano .select2-choice.select2-default span.select2-chosen::before {
+   background-image: url(../imgs/calendar.svg) !important;
+}
+
+.variant-component-2 .variant-component-actions {
+   grid-column: span 1/span 1;
+}
+
+.variant-component-2 .variant-component-actions button {
+   background-color: #0071E3;
+   padding-left: 0.625rem;
+   padding-right: 0.625rem;
+   padding-top: 0.625rem;
+   padding-bottom: 0.625rem;
+   border-radius: 8px;
+   color: #ffffff;
+   border: none;
+   font-size: 1.125rem;
+   line-height: 1;
+   cursor: pointer;
+   min-height: 2.625rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   font-family: 'Roboto';
+   font-weight: 500;
+}
+
+.variant-component-2 .variant-component-actions button:disabled {
+   opacity: 0.5;
+   cursor: not-allowed;
+}
+
+@media(max-width:1024px) {
+   .variant-component-2 .variant-component-actions {
+      width: 100%;
+   }
+
+   .variant-component-2 .variant-component-actions button {
+      width: 100%;
+   }
+}
+
+.variant-component-2 .variant-component-actions button:hover,
+.variant-component-2 .variant-component-actions button:focus {
+   background-color: #0061C3;
+}
+
+.variant-component-2 .variant-component-actions button:disabled {
+   background-color: #7FB2EF;
+}
+
+.select2-container-disabled {
+   filter: grayscale(1);
+   opacity: 0.5;
+}
+
+.variant-component-2 .variant-component-footer {
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   gap: 0.25rem;
+}
+
+.variant-component-2 .variant-component-option {
+   position: relative;
+}
+
+@media(max-width:1024px) {
+
+   .variant-component-2 .variant-component-option.variant-marca::before {
+      content: ' ';
+      width: 1.25rem;
+      height: 1.25rem;
+      background-image: url(../imgs/brand-green.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-width: 1.25rem;
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+   }
+
+   .variant-component-2 .variant-component-option.variant-model::before {
+      content: ' ';
+      width: 1.25rem;
+      height: 1.25rem;
+      background-image: url(../imgs/model-green.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-width: 1.25rem;
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+   }
+
+   .variant-component-2 .variant-component-option.variant-ano::before {
+      content: ' ';
+      width: 1.25rem;
+      height: 1.25rem;
+      background-image: url(../imgs/calendar-green.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-width: 1.25rem;
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+   }
+
+   .variant-component-2 .variant-component-option.variant-marca:not(.selected)::before {
+      background-image: url(../imgs/brand.svg) !important;
+   }
+
+   .variant-component-2 .variant-component-option.variant-model:not(.selected)::before {
+      background-image: url(../imgs/model.svg) !important;
+   }
+
+   .variant-component-2 .variant-component-option.variant-ano:not(.selected)::before {
+      background-image: url(../imgs/calendar.svg) !important;
+   }
+}
