@@ -1,16 +1,16 @@
-var select2Options = {
+var select2Options2 = {
    formatNoMatches: function () { return "Nada encontrado"; }
 }
 
-jQuery('.variant-component-2').ready(function () {
-   updateSelectMobile()
-
+jQuery(document).ready(function () {
+   $this = jQuery('.variant-component-2')
+   updateSelectMobile($this)
    if (!isMobile()) {
-      jQuery('.select2').select2(select2Options);
-      jQuery('.select2-search input').attr('placeholder', 'buscar')
+      $this.find('.select2').select2(select2Options2);
+      $this.find('.select2-search input').attr('placeholder', 'buscar')
    }
 
-   const variants = jQuery('.variant-component-2').data('variants');
+   const variants = $this.data('variants');
 
    function populateSelect($select, options, placeholder) {
       $select.empty();
@@ -21,9 +21,9 @@ jQuery('.variant-component-2').ready(function () {
       $select.prop('disabled', options.length === 0);
    }
 
-   var $marcaSelect = jQuery('#variant-marca-2');
-   var $modeloSelect = jQuery('#variant-model-2');
-   var $anoSelect = jQuery('#variant-ano-2');
+   var $marcaSelect = $this.find('#variant-marca-2');
+   var $modeloSelect = $this.find('#variant-model-2');
+   var $anoSelect = $this.find('#variant-ano-2');
 
    var rootKey = Object.keys(variants)[0];
    var marcas = Object.values(variants[rootKey]);
@@ -43,8 +43,8 @@ jQuery('.variant-component-2').ready(function () {
 
       populateSelect($anoSelect, [], 'Ano');
 
-      jQuery('.variant-component-actions-2 button').prop("disabled", true)
-      jQuery('#variant-ano-2').val(null).trigger('change')
+      $this.find('.variant-component-actions-2 button').prop("disabled", true)
+      $this.find('#variant-ano-2').val(null).trigger('change')
    });
 
    $modeloSelect.on('change', function () {
@@ -56,13 +56,13 @@ jQuery('.variant-component-2').ready(function () {
          var anos = Object.values(modeloData.data['attribute_pa_ano']);
          populateSelect($anoSelect, anos, 'Ano');
 
-         jQuery('.variant-component-actions-2 button').prop("disabled", false)
-         jQuery('#variant-ano-2').val(null).trigger('change')
+         $this.find('.variant-component-actions-2 button').prop("disabled", false)
+         $this.find('#variant-ano-2').val(null).trigger('change')
       } else {
          populateSelect($anoSelect, [], 'Ano');
 
-         jQuery('.variant-component-actions-2 button').prop("disabled", true)
-         jQuery('#variant-ano-2').val(null).trigger('change')
+         $this.find('.variant-component-actions-2 button').prop("disabled", true)
+         $this.find('#variant-ano-2').val(null).trigger('change')
       }
    });
 
@@ -92,22 +92,20 @@ jQuery('.variant-component-2').ready(function () {
 
 function clearOptionns(el) {
    el.find('option[remove]').remove()
-   console.log(el.parent())
    el.parent().removeClass('selected')
 }
 
-function updateSelectMobile() {
+function updateSelectMobile(elContainer) {
    if (isMobile()) {
-      clearOptionns(jQuery('#variant-marca-2'))
-      clearOptionns(jQuery('#variant-model-2'))
-      clearOptionns(jQuery('#variant-ano-2'))
+      clearOptionns(elContainer.find('#variant-marca-2'))
+      clearOptionns(elContainer.find('#variant-model-2'))
+      clearOptionns(elContainer.find('#variant-ano-2'))
 
-      jQuery('#variant-marca-2').select2('destroy').append('<option value="" disabled selected hidden>Marca</option>')
+      elContainer.find('#variant-marca-2').select2('destroy').append('<option value="" disabled selected hidden>Marca</option>')
 
-      jQuery('#variant-model-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Modelo</option>')
+      elContainer.find('#variant-model-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Modelo</option>')
 
-      jQuery('#variant-ano-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Ano</option>')
-
+      elContainer.find('#variant-ano-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Ano</option>')
    }
 }
 
