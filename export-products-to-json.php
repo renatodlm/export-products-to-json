@@ -20,13 +20,13 @@ add_action('wp_enqueue_scripts',  'export_products_scripts', 100);
 
 function export_products_scripts()
 {
-   // wp_enqueue_style('variant-product-select2-style', plugin_dir_url(__FILE__) . 'assets/libs/select2/select2.css', array(), '1.0', 'all');
+   wp_enqueue_style('export-product-select2-style-2', plugin_dir_url(__FILE__) . 'assets/libs/select2/select2.css', array(), '1.0', 'all');
 
-   // wp_enqueue_style('variant-select-style2', plugin_dir_url(__FILE__) . 'assets/css/v1-export-style', array(), '1.0.0', 'all');
+   wp_enqueue_style('export-select-style2', plugin_dir_url(__FILE__) . 'assets/css/v1-export-style.css', array(), '1.0.0', 'all');
 
-   // wp_enqueue_script('variant-product-select2-script', plugin_dir_url(__FILE__) . 'assets/libs/select2/select2.min.js', array('jquery'), '1.0', true);
+   wp_enqueue_script('export-product-select2-script-2', plugin_dir_url(__FILE__) . 'assets/libs/select2/select2.min.js', array('jquery'), '1.0', true);
 
-   wp_enqueue_script('variant-select-script-2', plugin_dir_url(__FILE__) . 'assets/js/v1-export-script.js', array('jquery'), '1.0.0', true);
+   wp_enqueue_script('export-select-script-2', plugin_dir_url(__FILE__) . 'assets/js/v1-export-script.js', array('jquery'), '1.0.0', true);
 }
 
 class Export_Products_To_JSON
@@ -277,9 +277,8 @@ class Export_Products_To_JSON
          return;
       }
 
+      debug($atts['pid']);
       $file_path = plugin_dir_path(__FILE__) . 'products.json';
-
-      debug($file_path);
 
       if (!file_exists($file_path))
       {
@@ -302,44 +301,41 @@ class Export_Products_To_JSON
 
       ob_start();
    ?>
+
       <div class="variant-component-2" data-variants='<?php echo json_encode($json[$atts['pid']]); ?>'>
-         <form action="<?php echo \get_permalink($atts['pid']) ?>" id="variant-component-form" method="GET">
-            <div class="variant-component-container">
-               <div class="variant-component-header">
-                  <div class="variant-component-search">
-                     <i class="variant-component-icon-search">
+         <form action="<?php echo \get_permalink($atts['pid']) ?>" id="variant-component-form-2" method="GET">
+            <div class="variant-component-container-2">
+               <div class="variant-component-header-2">
+                  <div class="variant-component-search-2">
+                     <i class="variant-component-icon-search-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M9.3 3C5.83127 3 3 5.83127 3 9.3C3 12.7687 5.83127 15.6 9.3 15.6C10.8732 15.6 12.3105 15.0132 13.4168 14.0531L13.8 14.4363V15.6L19.2 21L21 19.2L15.6 13.8H14.4363L14.0531 13.4168C15.0132 12.3105 15.6 10.8732 15.6 9.3C15.6 5.83127 12.7687 3 9.3 3ZM9.3 4.8C11.7959 4.8 13.8 6.80406 13.8 9.3C13.8 11.7959 11.7959 13.8 9.3 13.8C6.80406 13.8 4.8 11.7959 4.8 9.3C4.8 6.80406 6.80406 4.8 9.3 4.8Z" fill="black" />
                         </svg>
                      </i>
                      <p><strong class="font-bold">Encontre o tapete</strong><br> para o seu veículo</p>
                   </div>
-                  <!-- <div class="variant-component-plate">
-                  <label for="vc-plate">buscar <strong class="font-medium">por placa</strong></label>
-                  <input id="vc-plate" class='toggle' type="checkbox" name='vc-plate' />
-               </div> -->
                </div>
-               <div class="variant-component-body">
-                  <div class="variant-component-option variant-marca">
-                     <select id="variant-marca" name="attribute_pa_marca" class="select2" placeholder="Marca">
+               <div class="variant-component-body-2">
+                  <div class="variant-component-option-2 variant-marca-2">
+                     <select id="variant-marca-2" name="attribute_pa_marca" class="select2" placeholder="Marca">
                         <option remove></option>
                      </select>
                   </div>
-                  <div class="variant-component-option variant-model">
-                     <select id="variant-model" name="attribute_pa_modelo" class="select2" placeholder="Modelo" disabled>
+                  <div class="variant-component-option-2 variant-model-2">
+                     <select id="variant-model-2" name="attribute_pa_modelo" class="select2" placeholder="Modelo" disabled>
                         <option remove></option>
                      </select>
                   </div>
-                  <div class="variant-component-option variant-ano">
-                     <select id="variant-ano" name="attribute_pa_ano" class="select2" placeholder="Ano" disabled>
+                  <div class="variant-component-option-2 variant-ano-2">
+                     <select id="variant-ano-2" name="attribute_pa_ano" class="select2" placeholder="Ano" disabled>
                         <option remove></option>
                      </select>
                   </div>
-                  <div class="variant-component-actions">
+                  <div class="variant-component-actions-2">
                      <button disabled>Ver</button>
                   </div>
                </div>
-               <div class="variant-component-footer" style="display: none;">
+               <div class="variant-component-footer-2" style="display: none;">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <g clip-path="url(#clip0_2012_2240)">
                         <path d="M7.99999 1.33331C4.31999 1.33331 1.33333 4.31998 1.33333 7.99998C1.33333 11.68 4.31999 14.6666 7.99999 14.6666C11.68 14.6666 14.6667 11.68 14.6667 7.99998C14.6667 4.31998 11.68 1.33331 7.99999 1.33331ZM6.66666 11.3333L3.33333 7.99998L4.27333 7.05998L6.66666 9.44665L11.7267 4.38665L12.6667 5.33331L6.66666 11.3333Z" fill="#48BA12" />
@@ -350,7 +346,7 @@ class Export_Products_To_JSON
                         </clipPath>
                      </defs>
                   </svg>
-                  <p class="variant-component-message">
+                  <p class="variant-component-message-2">
                      Perfeito para <strong class="font-semibold"></strong>
                   </p>
                </div>
@@ -358,7 +354,6 @@ class Export_Products_To_JSON
          </form>
       </div>
 <?php
-      debug('ue');
       $content = ob_get_clean();
 
       return $content;

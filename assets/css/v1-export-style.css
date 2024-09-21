@@ -66,15 +66,11 @@
    border: 1px solid #E5E5E8 !important;
 }
 
-.variant-component-2 .select2-container {}
-
 .variant-component-2 .select2-container.select2-dropdown-open .select2-choice {
    border-bottom-left-radius: 0 !important;
    border-bottom-right-radius: 0 !important;
    border: 1px solid #0071E3 !important;
 }
-
-.variant-component-2 .select2-container .select2-container-active {}
 
 .variant-component-2 .select2-chosen {
    display: flex !important;
@@ -85,8 +81,6 @@
    text-overflow: ellipsis;
    overflow: hidden;
 }
-
-.variant-component-2 .elect2-search-choice-close {}
 
 .variant-component-2 .select2-container .select2-choice .select2-arrow {
    background: none !important;
@@ -165,7 +159,7 @@
 }
 
 @media(max-width:1024px) {
-   .variant-component-icon-search {
+   .variant-component-icon-search-2 {
       display: none;
    }
 }
@@ -216,41 +210,38 @@
    font-weight: 500;
 }
 
-.variant-component-2 .variant-component-form {}
-
-.variant-component-2 .variant-component-container {
+.variant-component-2 .variant-component-container-2 {
    display: flex;
    flex-direction: column;
    gap: 1rem;
 }
 
-.variant-component-2 .variant-component-container {
+.variant-component-2 .variant-component-container-2 {
    display: flex;
    flex-direction: column;
    gap: 1rem;
 }
 
-
-.variant-component-2 .variant-component-header {
+.variant-component-2 .variant-component-header-2 {
    display: flex;
    justify-content: space-between;
    gap: 1rem;
 }
 
 @media(max-width:1024px) {
-   .variant-component-2 .variant-component-header {
+   .variant-component-2 .variant-component-header-2 {
       flex-direction: column;
    }
 }
 
-.variant-component-2 .variant-component-search {
+.variant-component-2 .variant-component-search-2 {
    width: fit-content;
    display: flex;
    align-items: center;
    gap: 0.5rem;
 }
 
-.variant-component-2 .variant-component-plate {
+.variant-component-2 .variant-component-plate-2 {
    width: fit-content;
    display: flex;
    align-items: center;
@@ -258,12 +249,12 @@
 }
 
 @media(min-width:1024px) {
-   .variant-component-2 .variant-component-body {
+   .variant-component-2 .variant-component-body-2 {
       column-gap: 0.75rem;
    }
 }
 
-.variant-component-2 .variant-component-body {
+.variant-component-2 .variant-component-body-2 {
    display: grid;
    align-items: center;
    row-gap: 0.75rem;
@@ -272,24 +263,16 @@
 }
 
 @media(max-width:1024px) {
-   .variant-component-2 .variant-component-body {
+   .variant-component-2 .variant-component-body-2 {
       grid-template-columns: repeat(1, minmax(0, 1fr));
    }
 }
 
-/*
-.variant-component-2 .variant-component-option {
-   width: calc(25% - 0.5rem);
-} */
-
-/* @media(max-width:1024px) { */
-.variant-component-2 .variant-component-option {
+.variant-component-2 .variant-component-option-2 {
    grid-column: span 2/span 2;
 }
 
-/* } */
-
-.variant-component-2 .variant-component-option .variant-marca span.select2-chosen {
+.variant-component-2 .variant-component-option-2 .variant-marca-2 span.select2-chosen {
    position: relative;
    display: block;
 }
@@ -298,7 +281,7 @@
    margin-right: 0.5rem !important;
 }
 
-.variant-component-2 .variant-component-option.variant-marca span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-marca-2 span.select2-chosen::before {
    content: ' ';
    display: inline-block;
    width: 1.25rem;
@@ -310,7 +293,7 @@
    min-width: 1.25rem;
 }
 
-.variant-component-2 .variant-component-option.variant-model span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-model-2 span.select2-chosen::before {
    content: ' ';
    display: inline-block;
    width: 1.25rem;
@@ -322,7 +305,7 @@
    min-width: 1.25rem;
 }
 
-.variant-component-2 .variant-component-option.variant-ano span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-ano-2 span.select2-chosen::before {
    content: ' ';
    display: inline-block;
    width: 1.25rem;
@@ -334,7 +317,7 @@
    min-width: 1.25rem;
 }
 
-.variant-component-2 .variant-component-option select {
+.variant-component-2 .variant-component-option-2 select {
    padding-top: 0.4375rem !important;
    padding-bottom: 0.4375rem !important;
    text-indent: 1.3rem !important;
@@ -345,27 +328,27 @@
    height: 2.625rem !important;
 }
 
-.variant-component-2 .variant-component-option select::placeholder {
+.variant-component-2 .variant-component-option-2 select::placeholder {
    color: black !important;
 }
 
-.variant-component-2 .variant-component-option.variant-marca .select2-choice.select2-default span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-marca-2 .select2-choice.select2-default span.select2-chosen::before {
    background-image: url(../imgs/brand.svg) !important;
 }
 
-.variant-component-2 .variant-component-option.variant-model .select2-choice.select2-default span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-model-2 .select2-choice.select2-default span.select2-chosen::before {
    background-image: url(../imgs/model.svg) !important;
 }
 
-.variant-component-2 .variant-component-option.variant-ano .select2-choice.select2-default span.select2-chosen::before {
+.variant-component-2 .variant-component-option-2.variant-ano-2 .select2-choice.select2-default span.select2-chosen::before {
    background-image: url(../imgs/calendar.svg) !important;
 }
 
-.variant-component-2 .variant-component-actions {
+.variant-component-2 .variant-component-actions-2 {
    grid-column: span 1/span 1;
 }
 
-.variant-component-2 .variant-component-actions button {
+.variant-component-2 .variant-component-actions-2 button {
    background-color: #0071E3;
    padding-left: 0.625rem;
    padding-right: 0.625rem;
@@ -386,27 +369,27 @@
    font-weight: 500;
 }
 
-.variant-component-2 .variant-component-actions button:disabled {
+.variant-component-2 .variant-component-actions-2 button:disabled {
    opacity: 0.5;
    cursor: not-allowed;
 }
 
 @media(max-width:1024px) {
-   .variant-component-2 .variant-component-actions {
+   .variant-component-2 .variant-component-actions-2 {
       width: 100%;
    }
 
-   .variant-component-2 .variant-component-actions button {
+   .variant-component-2 .variant-component-actions-2 button {
       width: 100%;
    }
 }
 
-.variant-component-2 .variant-component-actions button:hover,
-.variant-component-2 .variant-component-actions button:focus {
+.variant-component-2 .variant-component-actions-2 button:hover,
+.variant-component-2 .variant-component-actions-2 button:focus {
    background-color: #0061C3;
 }
 
-.variant-component-2 .variant-component-actions button:disabled {
+.variant-component-2 .variant-component-actions-2 button:disabled {
    background-color: #7FB2EF;
 }
 
@@ -415,20 +398,20 @@
    opacity: 0.5;
 }
 
-.variant-component-2 .variant-component-footer {
+.variant-component-2 .variant-component-footer-2 {
    display: flex;
    align-items: center;
    justify-content: start;
    gap: 0.25rem;
 }
 
-.variant-component-2 .variant-component-option {
+.variant-component-2 .variant-component-option-2 {
    position: relative;
 }
 
 @media(max-width:1024px) {
 
-   .variant-component-2 .variant-component-option.variant-marca::before {
+   .variant-component-2 .variant-component-option-2.variant-marca-2::before {
       content: ' ';
       width: 1.25rem;
       height: 1.25rem;
@@ -444,7 +427,7 @@
       z-index: 100;
    }
 
-   .variant-component-2 .variant-component-option.variant-model::before {
+   .variant-component-2 .variant-component-option-2.variant-model-2::before {
       content: ' ';
       width: 1.25rem;
       height: 1.25rem;
@@ -460,7 +443,7 @@
       z-index: 100;
    }
 
-   .variant-component-2 .variant-component-option.variant-ano::before {
+   .variant-component-2 .variant-component-option-2.variant-ano-2::before {
       content: ' ';
       width: 1.25rem;
       height: 1.25rem;
@@ -476,15 +459,15 @@
       z-index: 100;
    }
 
-   .variant-component-2 .variant-component-option.variant-marca:not(.selected)::before {
+   .variant-component-2 .variant-component-option-2.variant-marca-2:not(.selected)::before {
       background-image: url(../imgs/brand.svg) !important;
    }
 
-   .variant-component-2 .variant-component-option.variant-model:not(.selected)::before {
+   .variant-component-2 .variant-component-option-2.variant-model-2:not(.selected)::before {
       background-image: url(../imgs/model.svg) !important;
    }
 
-   .variant-component-2 .variant-component-option.variant-ano:not(.selected)::before {
+   .variant-component-2 .variant-component-option-2.variant-ano-2:not(.selected)::before {
       background-image: url(../imgs/calendar.svg) !important;
    }
 }
