@@ -26,7 +26,7 @@ function export_products_scripts()
 
    wp_enqueue_script('export-product-select2-script-2', plugin_dir_url(__FILE__) . 'assets/libs/select2/select2.min.js', array('jquery'), '1.0', true);
 
-   wp_enqueue_script('export-select-script-2', plugin_dir_url(__FILE__) . 'assets/js/v1-export-script.js', array('jquery'), '1.0.0', true);
+   wp_enqueue_script('export-select-script-2', plugin_dir_url(__FILE__) . 'assets/js/v2-export-script.js', array('jquery'), '1.0.0', true);
 }
 
 class Export_Products_To_JSON
