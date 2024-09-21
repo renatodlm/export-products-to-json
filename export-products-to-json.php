@@ -277,7 +277,6 @@ class Export_Products_To_JSON
          return;
       }
 
-      debug($atts['pid']);
       $file_path = plugin_dir_path(__FILE__) . 'products.json';
 
       if (!file_exists($file_path))
