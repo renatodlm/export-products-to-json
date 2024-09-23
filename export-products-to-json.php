@@ -272,11 +272,6 @@ class Export_Products_To_JSON
 
    public function variant_product_select_2_shortcode($atts)
    {
-      if (empty($atts['pid']))
-      {
-         return;
-      }
-
       $file_path = plugin_dir_path(__FILE__) . 'products.json';
 
       if (!file_exists($file_path))
@@ -293,16 +288,33 @@ class Export_Products_To_JSON
 
       $json = json_decode($json, true);
 
-      if (empty($json[$atts['pid']]))
+      ob_start();
+
+      if (!empty($atts['pid']) && !empty($json[$atts['pid']]))
       {
-         return;
+         $data = $json[$atts['pid']];
+         $json = [];
+         $json[$atts['pid']] = $data;
       }
 
-      ob_start();
+      $actions = [];
+
+      foreach ($json as $key => $value)
+      {
+
+         if (!is_numeric($key))
+         {
+            continue;
+         }
+
+         $actions[$key] = esc_url(get_permalink((int) $key));
+         // 'marcas' => array_keys($value['attribute_pa_marca']);
+      }
+
    ?>
 
-      <div class="variant-component-2" data-variants='<?php echo json_encode($json[$atts['pid']]); ?>'>
-         <form action="<?php echo \get_permalink($atts['pid']) ?>" id="variant-component-form-2" method="GET">
+      <div class="variant-component-2" data-variants='<?php echo json_encode($json); ?>' data-actions='<?php echo json_encode($actions); ?>'>
+         <form action="<?php echo \get_permalink($atts['pid']) ?>" method="GET">
             <div class="variant-component-container-2">
                <div class="variant-component-header-2">
                   <div class="variant-component-search-2">
@@ -316,17 +328,17 @@ class Export_Products_To_JSON
                </div>
                <div class="variant-component-body-2">
                   <div class="variant-component-option-2 variant-marca-2">
-                     <select id="variant-marca-2" name="attribute_pa_marca" class="select2" placeholder="Marca">
+                     <select name="attribute_pa_marca" class="variant-marca-2-select select2" placeholder="Marca">
                         <option remove></option>
                      </select>
                   </div>
                   <div class="variant-component-option-2 variant-model-2">
-                     <select id="variant-model-2" name="attribute_pa_modelo" class="select2" placeholder="Modelo" disabled>
+                     <select name="attribute_pa_modelo" class="variant-model-2-select select2" placeholder="Modelo" disabled>
                         <option remove></option>
                      </select>
                   </div>
                   <div class="variant-component-option-2 variant-ano-2">
-                     <select id="variant-ano-2" name="attribute_pa_ano" class="select2" placeholder="Ano" disabled>
+                     <select name="attribute_pa_ano" class="variant-ano-2-select select2" placeholder="Ano" disabled>
                         <option remove></option>
                      </select>
                   </div>

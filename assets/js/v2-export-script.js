@@ -3,112 +3,186 @@ var select2Options2 = {
 }
 
 jQuery(document).ready(function () {
-   $this = jQuery('.variant-component-2')
-   updateSelectMobile($this)
-   if (!isMobile()) {
-      $this.find('.select2').select2(select2Options2);
-      $this.find('.select2-search input').attr('placeholder', 'buscar')
-   }
+   var $variantComponents = jQuery('.variant-component-2');
 
-   const variants = $this.data('variants');
+   $variantComponents.each(function (index, thisElement) {
+      var $this = jQuery(this);
+      var formActions = $this.data('actions')
 
-   function populateSelect($select, options, placeholder) {
-      $select.empty();
-      $select.append('<option value="" disabled selected hidden>' + placeholder + '</option>');
-      options.forEach(function (option) {
-         $select.append('<option value="' + option.value + '">' + option.name + '</option>');
-      });
-      $select.prop('disabled', options.length === 0);
-   }
+      updateSelectMobile2(thisElement);
 
-   var $marcaSelect = $this.find('#variant-marca-2');
-   var $modeloSelect = $this.find('#variant-model-2');
-   var $anoSelect = $this.find('#variant-ano-2');
+      var $marcaSelect = $this.find('.variant-marca-2-select');
+      var $modeloSelect = $this.find('.variant-model-2-select');
+      var $anoSelect = $this.find('.variant-ano-2-select');
 
-   var rootKey = Object.keys(variants)[0];
-   var marcas = Object.values(variants[rootKey]);
-
-   populateSelect($marcaSelect, marcas, 'Marca');
-
-   $marcaSelect.on('change', function () {
-      var selectedMarca = $marcaSelect.val();
-      var marcaData = variants[rootKey][selectedMarca];
-
-      if (marcaData && marcaData.data && marcaData.data['attribute_pa_modelo']) {
-         var modelos = Object.values(marcaData.data['attribute_pa_modelo']);
-         populateSelect($modeloSelect, modelos, 'Modelo');
-      } else {
-         populateSelect($modeloSelect, [], 'Modelo');
+      if (!isMobile()) {
+         $this.find($marcaSelect).select2(select2Options2);
+         $this.find($modeloSelect).select2(select2Options2);
+         $this.find($anoSelect).select2(select2Options2);
+         $this.find('.select2-search input').attr('placeholder', 'buscar');
       }
 
-      populateSelect($anoSelect, [], 'Ano');
+      const variants = $this.data('variants');
 
-      $this.find('.variant-component-actions-2 button').prop("disabled", true)
-      $this.find('#variant-ano-2').val(null).trigger('change')
-   });
+      function populateSelect($select, options, placeholder) {
+         var newOptions = ''
 
-   $modeloSelect.on('change', function () {
-      var selectedMarca = $marcaSelect.val();
-      var selectedModelo = $modeloSelect.val();
-      var modeloData = variants[rootKey][selectedMarca].data['attribute_pa_modelo'][selectedModelo];
+         if (!isMobile()) {
+            newOptions += '<option remove></option>';
+         } else {
+            newOptions += '<option value="" disabled selected hidden>' + placeholder + '</option>';
+         }
 
-      if (modeloData && modeloData.data && modeloData.data['attribute_pa_ano']) {
-         var anos = Object.values(modeloData.data['attribute_pa_ano']);
-         populateSelect($anoSelect, anos, 'Ano');
+         // $select.empty();
 
-         $this.find('.variant-component-actions-2 button').prop("disabled", false)
-         $this.find('#variant-ano-2').val(null).trigger('change')
-      } else {
-         populateSelect($anoSelect, [], 'Ano');
+         options.forEach(function (option) {
+            newOptions += '<option value="' + option.value + '">' + option.name + '</option>';
+         });
 
-         $this.find('.variant-component-actions-2 button').prop("disabled", true)
-         $this.find('#variant-ano-2').val(null).trigger('change')
-      }
-   });
-
-   $anoSelect.on('change', function () {
-      var selectedMarca = $marcaSelect.val();
-      var selectedModelo = $modeloSelect.val();
-      var selectedAno = $anoSelect.val();
-      var anoData = variants[rootKey][selectedMarca]
-         .data['attribute_pa_modelo'][selectedModelo]
-         .data['attribute_pa_ano'][selectedAno];
-
-      if (anoData && anoData.data) {
-         var products = [];
-         var attributeCor = anoData.data['attribute_pa_cor'];
-         if (attributeCor) {
-            Object.values(attributeCor).forEach(function (corOption) {
-               if (corOption.data && Array.isArray(corOption.data)) {
-                  corOption.data.forEach(function (product) {
-                     products.push(product.product_id);
-                  });
-               }
-            });
+         if (!isMobile()) {
+            $select.select2('destroy').html(newOptions).prop("disabled", false).select2(select2Options);
+         } else {
+            $select.select2('destroy').html(newOptions).prop("disabled", false)
          }
       }
+
+      var productIDs = Object.keys(variants);
+
+      var marcasObj = [];
+
+      productIDs.forEach(function (productID) {
+         var variant = variants[productID];
+         Object.keys(variant).forEach(function (marcaKey) {
+            Object.keys(variant[marcaKey]).forEach((marca) => {
+               marcasObj[marca] = variant[marcaKey][marca];
+            })
+         });
+      });
+
+      var marcas = Object.values(marcasObj);
+
+      populateSelect($marcaSelect, marcas, 'Marca');
+
+      $marcaSelect.on('change', function () {
+         var selectedMarca = $marcaSelect.val();
+         var modelosObj = {};
+         productIDs.forEach(function (productID) {
+            var marcaData = marcasObj[selectedMarca];
+            if (marcaData && marcaData.data && marcaData.data['attribute_pa_modelo']) {
+               var modelosData = marcaData.data['attribute_pa_modelo'];
+               Object.keys(modelosData).forEach(function (modeloKey) {
+                  var modeloData = modelosData[modeloKey];
+                  if (!modelosObj[modeloKey]) {
+                     modelosObj[modeloKey] = modeloData;
+                  }
+               });
+            }
+         });
+
+         var modelos = Object.values(modelosObj);
+
+         if (modelos.length > 0) {
+            populateSelect($modeloSelect, modelos, 'Modelo');
+         } else {
+            populateSelect($modeloSelect, [], 'Modelo');
+         }
+
+         populateSelect($anoSelect, [], 'Ano');
+
+         $this.find('.variant-component-actions-2 button').prop("disabled", true);
+         $this.find('.variant-ano-2-select').val(null).trigger('change');
+      });
+
+      $modeloSelect.on('change', function () {
+         var selectedMarca = $marcaSelect.val();
+         var selectedModelo = $modeloSelect.val();
+         var anosObj = {};
+         productIDs.forEach(function (productID) {
+            var marcaData = variants[productID]['attribute_pa_marca'][selectedMarca];
+
+            if (marcaData) {
+               console.log(formActions[productID]);
+               $this.find('form').attr('action', formActions[productID]);
+            }
+
+            if (marcaData && marcaData.data && marcaData.data['attribute_pa_modelo']) {
+               var modeloData = marcaData.data['attribute_pa_modelo'][selectedModelo];
+               if (modeloData && modeloData.data && modeloData.data['attribute_pa_ano']) {
+                  var anosData = modeloData.data['attribute_pa_ano'];
+                  Object.keys(anosData).forEach(function (anoKey) {
+                     var anoData = anosData[anoKey];
+                     if (!anosObj[anoKey]) {
+                        anosObj[anoKey] = anoData;
+                     }
+                  });
+               }
+            }
+         });
+
+         var anos = Object.values(anosObj);
+
+         if (anos.length > 0) {
+            populateSelect($anoSelect, anos, 'Ano');
+            $this.find('.variant-component-actions-2 button').prop("disabled", false);
+            $this.find('.variant-ano-2-select').val(null).trigger('change');
+         } else {
+            populateSelect($anoSelect, [], 'Ano');
+            $this.find('.variant-component-actions-2 button').prop("disabled", true);
+            $this.find('.variant-ano-2-select').val(null).trigger('change');
+         }
+      });
+
+      $anoSelect.on('change', function () {
+         var selectedMarca = $marcaSelect.val();
+         var selectedModelo = $modeloSelect.val();
+         var selectedAno = $anoSelect.val();
+         var products = [];
+         productIDs.forEach(function (productID) {
+            var marcaData = marcasObj[selectedMarca];
+            if (marcaData && marcaData.data && marcaData.data['attribute_pa_modelo']) {
+               var modeloData = marcaData.data['attribute_pa_modelo'][selectedModelo];
+               if (modeloData && modeloData.data && modeloData.data['attribute_pa_ano']) {
+                  var anoData = modeloData.data['attribute_pa_ano'][selectedAno];
+                  if (anoData && anoData.data) {
+                     var attributeCor = anoData.data['attribute_pa_cor'];
+                     if (attributeCor) {
+                        Object.values(attributeCor).forEach(function (corOption) {
+                           if (corOption.data && Array.isArray(corOption.data)) {
+                              corOption.data.forEach(function (product) {
+                                 products.push(product.product_id);
+                              });
+                           }
+                        });
+                     }
+                  }
+               }
+            }
+         });
+      });
    });
 });
 
 function clearOptionns(el) {
-   el.find('option[remove]').remove()
-   el.parent().removeClass('selected')
+   el.find('option[remove]').remove();
+   el.parent().removeClass('selected');
 }
 
-function updateSelectMobile(elContainer) {
+function updateSelectMobile2(elContainer) {
+   const $theContainer = jQuery(elContainer)
+
    if (isMobile()) {
-      clearOptionns(elContainer.find('#variant-marca-2'))
-      clearOptionns(elContainer.find('#variant-model-2'))
-      clearOptionns(elContainer.find('#variant-ano-2'))
+      clearOptionns($theContainer.find('.variant-marca-2-select'));
+      clearOptionns($theContainer.find('.variant-model-2-select'));
+      clearOptionns($theContainer.find('.variant-ano-2-select'));
 
-      elContainer.find('#variant-marca-2').select2('destroy').append('<option value="" disabled selected hidden>Marca</option>')
+      $theContainer.find('.variant-marca-2-select').select2('destroy').append('<option value="" disabled selected hidden>Marca</option>');
 
-      elContainer.find('#variant-model-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Modelo</option>')
+      $theContainer.find('.variant-model-2-select').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Modelo</option>');
 
-      elContainer.find('#variant-ano-2').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Ano</option>')
+      $theContainer.find('.variant-ano-2-select').select2('destroy').prop("disabled", true).append('<option value="" disabled selected hidden>Ano</option>');
    }
 }
 
 function isMobile() {
-   return window.innerWidth < 1024
+   return window.innerWidth < 1024;
 }
